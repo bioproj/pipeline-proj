@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <property name="LOG_HOME" value="./logs" />
+    <!--<property name="log.pattern" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />-->
+    <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+    <property name="local.level" value="debug" />
+
+    <!-- 控制台输出 -->
+    <appender name="ConsoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 日志输出编码 -->
+        <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!-- 按照每天生成日志文件 -->
+    <!--Info文件输出-->
+    <!-- 按照每天和固定大小(5MB)生成日志文件【最新的日志，是日期最大数字最大的】 -->
+    <appender name="FileInfoLog"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--如果只是想要 Info 级别的日志，只是过滤 info 还是会输出 Error 日志，因为 Error 的级别高，
+        所以我们使用下面的策略，可以避免输出 Error 的日志，这种方式不能避免warn过滤日志-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+            &lt;!&ndash;过滤 Error&ndash;&gt;
+            <level>ERROR</level>
+            &lt;!&ndash;匹配到就禁止&ndash;&gt;
+            <onMatch>DENY</onMatch>
+            &lt;!&ndash;没有匹配到就允许&ndash;&gt;
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>-->
+
+        <!--只输出INFO-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--过滤 INFO-->
+            <level>INFO</level>
+            <!--匹配到就允许-->
+            <onMatch>ACCEPT</onMatch>
+            <!--没有匹配到就禁止-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出文件名-->
+            <FileNamePattern>${LOG_HOME}/Info/server_info_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+            <!--日志单文件最大值-->
+            <MaxFileSize>1024MB</MaxFileSize>
+        </rollingPolicy>
+
+        <!--格式化输出-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%msg：日志消息，%n是换行符-->
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--Error文件输出-->
+    <!-- 按照每天和固定大小(5MB)生成日志文件【最新的日志，是日期最大数字最大的】 -->
+    <appender name="FileErrorLog"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--设置日志级别,过滤掉info日志,只输入error日志-->
+            <level>ERROR</level>
+        </filter>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/Error/server_error_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+            <!--日志文件最大的大小-->
+            <MaxFileSize>1024MB</MaxFileSize>
+        </rollingPolicy>
+        <!--格式化输出-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%msg：日志消息，%n是换行符-->
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+
+    <!--特殊文件输出-->
+    <!-- 按照每天和固定大小(5MB)生成日志文件【最新的日志，是日期最大数字最大的】 -->
+    <appender name="SpecialLog"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/Special/server_Special_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+            <!--日志文件最大的大小-->
+            <MaxFileSize>1024MB</MaxFileSize>
+        </rollingPolicy>
+        <!--格式化输出-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%msg：日志消息，%n是换行符-->
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--root日志等级设置，默认为error，可有可无-->
+    <logger name="root">
+        <level value="ERROR"></level>
+    </logger>
+
+    <!--日志等级设置-->
+    <!--<logger name="org.springframework" level="debug" additivity="false"></logger>-->
+
+    <!--logger专门指定某个包或某个类的日志打印级别-->
+    <!--additivity=false 向上级logger传递打印信息关闭，默认为true-->
+    <!--如果local.level存在，则启用local.level，否则启用info-->
+    <logger name="com.zhy.cn.controller" level="${local.level:-info}" additivity="true">
+        <appender-ref ref="SpecialLog"/>
+    </logger>
+
+
+    <!-- 日志输出级别 -->
+    <root level="info">
+        <appender-ref ref="ConsoleLog"/>
+        <appender-ref ref="FileInfoLog"/>
+        <appender-ref ref="FileErrorLog"/>
+    </root>
+</configuration>

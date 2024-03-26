@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nf-test1
+  name: nf-test1
+  namespace: nextflow
+spec:
+  containers:
+    - command: ["sleep","600"]
+      env:
+        - name: NXF_HOME
+          value: /data/user
+        - name: KUBECONFIG
+          value: /data/user/.kube/config
+      image: wybioinfo/nextflow:23.11.0
+      name: nf-test
+      volumeMounts:
+        - mountPath: /data
+          name: nfdata
+#        - mountPath: /etc/hosts
+#          name: nfdata
+#          subPath: user/hosts
+  securityContext:
+    runAsUser: 1000
+  volumes:
+    - name: nfdata
+      persistentVolumeClaim:
+        claimName: nfdata
+
+
+#  kubectl apply -f app.yaml
+#  kubectl delete pod nf-test1 -n nextflow
+#  kubectl exec -it nf-test1 -n nextflow -- bash
+
+# mkdir -p/data/user/
+#  cp -r ~/.kube .
+#  cp -r ~/.minikube/ .
+
+# docker run --rm \
+#     --user $(id -u):$(id -g) \
+#     -v /data:/data \
+#     -e NXF_HOME=/data/nxf_home \
+#     -e KUBECONFIG=/data/user/.kube/config \
+#     -w $PWD -it \
+#     wybioinfo/nextflow:23.11.0 bash
+
+
+# docker tag  xxx 192.168.3.60:5001/hisat2:2.2.1
+# docker push 192.168.3.60:5001/hisat2:2.2.1
+
+
+#  nf run main.nf -w /data

@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: nf-test
+  name: nf-test
+  namespace: nextflow
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+        - command: ["nf","run","/data/nf-hello/main.nf"]
+          env:
+            - name: KUBECONFIG
+              value: /data/user/.kube/config
+            - name: NXF_HOME
+              value: /data/user
+          workingDir: /data/nf-hello
+          image: wybioinfo/nextflow:23.11.0
+          name: nf-test
+          volumeMounts:
+            - mountPath: /data
+              name: nfdata
+              subPath: ''
+      restartPolicy: Never
+      securityContext:
+        runAsGroup: 1000
+        runAsUser: 1000
+      volumes:
+        - name: nfdata
+          persistentVolumeClaim:
+            claimName: nfdata
+
+
+#  kubectl replace --force -f jobs.yaml

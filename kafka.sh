@@ -1,0 +1,2 @@
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic 59c4541e-a585-477a-be6f-d753106f52f8  --group group1
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group group1

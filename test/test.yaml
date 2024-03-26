@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: nf-test
+  name: nf-test
+  namespace: nextflow
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+        - args:
+            - nf
+            - -log
+            - /data/nf-hello/output/nextflow.log
+            - run
+            - /data/nf-hello/main.nf
+            - -latest
+            - -params-file
+            - /data/nf-hello/params.json
+            - --workflowId
+            - 032a6e73-782c-4ecc-bada-6efe3c70f0e5
+            - -resume
+            - '|'
+            - tee
+            - /data/nf-hello/.workflow.log
+          env:
+            - name: KUBECONFIG
+              value: /data/user/.kube/config
+            - name: NXF_HOME
+              value: /data/user
+          image: wybioinfo/nextflow:23.11.0
+          name: nf-test
+          volumeMounts:
+            - mountPath: /data
+              name: nfdata
+              subPath: ''
+          workingDir: /data/nf-hello
+      restartPolicy: Never
+      securityContext:
+        runAsGroup: 1000
+        runAsUser: 1000
+      volumes:
+        - name: nfdata
+          persistentVolumeClaim:
+            claimName: nfdata
