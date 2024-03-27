@@ -13,9 +13,6 @@ docker build -t master:5000/spring-cloud/mbiolance-service-pipeline-1.0.0.jar .
 echo "推送docker镜像到本地私服......"
 docker push master:5000/spring-cloud/mbiolance-service-pipeline-1.0.0.jar
 
-echo "推送docker镜像到阿里云......"
-docker tag master:5000/spring-cloud/mbiolance-service-pipeline-1.0.0.jar registry.cn-wulanchabu.aliyuncs.com/minebiomeapp/mbiolance-service-pipeline-1.0.0.jar
-docker push registry.cn-wulanchabu.aliyuncs.com/minebiomeapp/mbiolance-service-pipeline-1.0.0.jar
 
 echo "停止运行的容器......"
 docker stop  mbiolance-service-pipeline
