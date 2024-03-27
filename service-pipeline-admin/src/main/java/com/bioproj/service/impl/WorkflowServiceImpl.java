@@ -1,5 +1,6 @@
 package com.bioproj.service.impl;
 
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.domain.enums.WorkflowType;
 import com.bioproj.domain.params.WorkflowParams;
 import com.bioproj.k8s.ApiSuccessCallback;
@@ -19,7 +20,6 @@ import com.bioproj.service.store.IStoreService;
 import com.bioproj.utils.FileUtils;
 import com.bioproj.utils.TaskUtil;
 import com.google.common.base.Joiner;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
 import io.kubernetes.client.openapi.apis.BatchV1Api;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.V1Container;

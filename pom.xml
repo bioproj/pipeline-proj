@@ -14,14 +14,16 @@
     <modules>
         <module>service-pipeline-admin</module>
         <module>service-pipeline-api</module>
+        <module>service-pipeline-boot</module>
+        <module>service-cloud-api</module>
     </modules>
 
 
 
 
 
-    <groupId>com.mbiolance.cloud</groupId>
-    <artifactId>nextflow-java-api</artifactId>
+    <groupId>org.bioproj.cloud</groupId>
+    <artifactId>bioproj-service-pipeline</artifactId>
     <version>1.0</version>
 
     <properties>

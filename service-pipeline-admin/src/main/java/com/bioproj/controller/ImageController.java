@@ -1,14 +1,15 @@
 package com.bioproj.controller;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
 import com.bioproj.domain.enums.ImageType;
 import com.bioproj.domain.vo.ImagesVo;
 import com.bioproj.pojo.Images;
 import com.bioproj.service.images.IImagesService;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,5 +1,8 @@
 package com.bioproj.service.impl;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.QueryCriteriaVo;
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.domain.vo.ApplicationVo;
 import com.bioproj.domain.vo.K8sAppVo;
 import com.bioproj.pojo.Application;
@@ -10,11 +13,7 @@ import com.bioproj.service.IApplicationService;
 import com.bioproj.service.IProcessService;
 import com.bioproj.service.IWorkflowService;
 import com.bioproj.utils.ServiceUtil;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
-import com.mbiolance.cloud.auth.domain.vo.QueryCriteriaVo;
-import com.mbiolance.cloud.auth.rpc.SysUserFeignService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -31,8 +30,8 @@ public class ApplicationServiceImpl implements IApplicationService {
     private AppRepository appRepository;
 
 
-    @Autowired
-    SysUserFeignService sysUserFeignService;
+//    @Autowired
+//    SysUserFeignService sysUserFeignService;
     @Autowired
     private IProcessService processService;
 
@@ -73,7 +72,7 @@ public class ApplicationServiceImpl implements IApplicationService {
 
 
     @Override
-    public Page<Application> page(SysUserDto user,Pageable pageable) {
+    public Page<Application> page(SysUserDto user, Pageable pageable) {
         Application application = new Application();
         if(!user.getLoginName().equals("admin")){
             application = Application.builder()
@@ -104,14 +103,14 @@ public class ApplicationServiceImpl implements IApplicationService {
         List<Application> content = page.getContent();
         List<Integer> userIds = ServiceUtil.fetchListProperty(content, Application::getUserId);
 
-        R<List<SysUserDto>> userList = sysUserFeignService.getByIds(userIds);
-        Map<Integer, SysUserDto> userDtoMap = ServiceUtil.convertToMap(userList.getData(), SysUserDto::getId);
+//        R<List<SysUserDto>> userList = sysUserFeignService.getByIds(userIds);
+//        Map<Integer, SysUserDto> userDtoMap = ServiceUtil.convertToMap(userList.getData(), SysUserDto::getId);
         List<ApplicationVo> k8sAppVos = content.stream().map(item -> {
             ApplicationVo applicationVo = new ApplicationVo();
-            if (userDtoMap.containsKey(item.getUserId())) {
-                SysUserDto sysUserDto = userDtoMap.get(item.getUserId());
-                applicationVo.setNickname(sysUserDto.getName());
-            }
+//            if (userDtoMap.containsKey(item.getUserId())) {
+//                SysUserDto sysUserDto = userDtoMap.get(item.getUserId());
+//                applicationVo.setNickname(sysUserDto.getName());
+//            }
             BeanUtils.copyProperties(item, applicationVo);
             return applicationVo;
         }).collect(Collectors.toList());

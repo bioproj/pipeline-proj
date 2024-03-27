@@ -1,10 +1,11 @@
 package com.bioproj.service.impl;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.QueryCriteriaVo;
 import com.bioproj.pojo.task.TaskData;
 import com.bioproj.repository.TaskDataRepository;
 import com.bioproj.service.ITaskDataService;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.vo.QueryCriteriaVo;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

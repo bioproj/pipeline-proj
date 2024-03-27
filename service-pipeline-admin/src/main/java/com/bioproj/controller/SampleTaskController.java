@@ -1,14 +1,12 @@
 package com.bioproj.controller;
 
-import com.bioproj.domain.BaseResponse;
-import com.bioproj.domain.vo.K8sAppVo;
+import com.bioproj.pojo.BaseResponse;
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
 import com.bioproj.domain.vo.WorkflowTaskVo;
 import com.bioproj.pojo.task.SampleTask;
 import com.bioproj.service.ISampleTaskService;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +39,7 @@ public class SampleTaskController {
 
 
     @GetMapping("/pageBy/{workflowId}")
-    public R<PageModel<SampleTask>> pageBy(@PathVariable("workflowId") String workflowId,Integer number, Integer size){
+    public R<PageModel<SampleTask>> pageBy(@PathVariable("workflowId") String workflowId, Integer number, Integer size){
         PageModel<SampleTask>  sampleTaskList = sampleTaskService.pageBy(workflowId,number, size, null);
         return  R.ok(sampleTaskList);
     }

@@ -1,4 +1,4 @@
-package com.bioproj.domain;
+package com.bioproj.pojo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;

@@ -1,8 +1,8 @@
 package com.bioproj.service.images;
 
+import com.bioproj.domain.PageModel;
 import com.bioproj.domain.vo.ImagesVo;
 import com.bioproj.pojo.Images;
-import com.mbiolance.cloud.auth.domain.PageModel;
 
 public interface IImagesService {
 

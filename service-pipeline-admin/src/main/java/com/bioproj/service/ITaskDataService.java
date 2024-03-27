@@ -1,8 +1,8 @@
 package com.bioproj.service;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.QueryCriteriaVo;
 import com.bioproj.pojo.task.TaskData;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.vo.QueryCriteriaVo;
 
 import java.util.List;
 import java.util.Set;

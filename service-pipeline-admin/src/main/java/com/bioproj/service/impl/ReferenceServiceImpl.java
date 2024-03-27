@@ -1,10 +1,11 @@
 package com.bioproj.service.impl;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.QueryCriteriaVo;
 import com.bioproj.pojo.reference.Reference;
 import com.bioproj.repository.ReferenceRepository;
 import com.bioproj.service.IReferenceService;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.vo.QueryCriteriaVo;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

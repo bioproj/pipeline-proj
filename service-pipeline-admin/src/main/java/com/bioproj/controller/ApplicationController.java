@@ -1,5 +1,8 @@
 package com.bioproj.controller;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.domain.vo.ApplicationVo;
 import com.bioproj.pojo.Application;
 import com.bioproj.domain.params.WorkflowParams;
@@ -10,14 +13,10 @@ import com.bioproj.pojo.vo.ApplicationExVo;
 import com.bioproj.rpc.ApplicationFeignService;
 import com.bioproj.service.*;
 import com.bioproj.service.executor.IExecutorsService;
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import com.bioproj.service.store.IStoreService;
 import com.bioproj.utils.FileUtils;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.common.SystemRuntimeException;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -58,11 +57,11 @@ public class ApplicationController implements ApplicationFeignService {
     @GetMapping("/install/{repoId}")
     @ApiOperation("安装应用")
     public BaseResponse install(@PathVariable("repoId") String repoId){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user =  new SysUserDto();//SysUserInfoContext.getUser();
         Repos repos = wareHouseService.findById(repoId);
         Application application = appService.findByUserAndRepoId(user,repos.getId());
         if(application!=null){
-            throw new SystemRuntimeException("用户["+user.getLoginName()+"]已经安装应用["+repos.getCloneUrl()+"]！");
+            throw new RuntimeException("用户["+user.getLoginName()+"]已经安装应用["+repos.getCloneUrl()+"]！");
         }
         application = new Application();
         application.setRepoId(repos.getId());
@@ -146,7 +145,7 @@ public class ApplicationController implements ApplicationFeignService {
     }
     @GetMapping("page")
     public R<PageModel<ApplicationVo>> page(Integer number, Integer size) {
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
         PageModel<ApplicationVo> pageModel = appService.page(user,number, size, null);
         return R.ok(pageModel);
     }
@@ -173,42 +172,42 @@ public class ApplicationController implements ApplicationFeignService {
 //    }
 
 
-    @Override
-    public BaseResponse launch(@PathVariable("id") String id, @RequestBody WorkflowParams workflowParams){
-
-        SysUserDto user = SysUserInfoContext.getUser();
-
-
-        Workflow workflow = new Workflow();
-        BeanUtils.copyProperties(workflowParams, workflow);
-        Application app = appService.findById(id);
-        if(workflow.getIsDebug()){
-            Workflow findTask = workflowService.findByUserIdAndIsDebug(user.getId(),app.getId(), true);
-            if(findTask!=null){
-                throw new SystemRuntimeException("用户["+user.getLoginName()+"]已经创建了应用["+app.getPipeline()+"]的debug任务！");
-            }
-
-        }
-
-
-        BeanUtils.copyProperties(app,workflow,"id" ,"name");
-        workflow.setPipelineName(app.getName());
-        workflow.setApplicationId(app.getId());
-
-        if(workflow.getIsDebug()==null){
-            workflow.setIsDebug(false);
-        }
-
-
-        List<Samples> samplesList = workflowParams.getSamples().stream().map(item -> {
-            Samples samples = new Samples();
-            BeanUtils.copyProperties(item, samples);
-            return samples;
-        }).collect(Collectors.toList());
-
-        workflowService.submit(workflow,samplesList, user);
-        return BaseResponse.ok("success!");
-    }
+//    @Override
+//    public BaseResponse launch(@PathVariable("id") String id, @RequestBody WorkflowParams workflowParams){
+//
+//        SysUserDto user = new SysUserDto(); //SysUserInfoContext.getUser();
+//
+//
+//        Workflow workflow = new Workflow();
+//        BeanUtils.copyProperties(workflowParams, workflow);
+//        Application app = appService.findById(id);
+//        if(workflow.getIsDebug()){
+//            Workflow findTask = workflowService.findByUserIdAndIsDebug(user.getId(),app.getId(), true);
+//            if(findTask!=null){
+//                throw new RuntimeException("用户["+user.getLoginName()+"]已经创建了应用["+app.getPipeline()+"]的debug任务！");
+//            }
+//
+//        }
+//
+//
+//        BeanUtils.copyProperties(app,workflow,"id" ,"name");
+//        workflow.setPipelineName(app.getName());
+//        workflow.setApplicationId(app.getId());
+//
+//        if(workflow.getIsDebug()==null){
+//            workflow.setIsDebug(false);
+//        }
+//
+//
+//        List<Samples> samplesList = workflowParams.getSamples().stream().map(item -> {
+//            Samples samples = new Samples();
+//            BeanUtils.copyProperties(item, samples);
+//            return samples;
+//        }).collect(Collectors.toList());
+//
+//        workflowService.submit(workflow,samplesList, user);
+//        return BaseResponse.ok("success!");
+//    }
 
 //    @KafkaListener(topics = "tasks-queue", groupId = "test1")
 //    public void listenGroupFoo(String message) {

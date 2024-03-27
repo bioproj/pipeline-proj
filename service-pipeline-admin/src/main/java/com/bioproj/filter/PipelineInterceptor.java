@@ -1,7 +1,7 @@
 package com.bioproj.filter;
 
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
+import com.bioproj.domain.SysUserDto;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,12 +18,12 @@ public class PipelineInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
         if(user==null && authDebug){
             user = new SysUserDto();
             user.setId(1);
             user.setLoginName("admin");
-            SysUserInfoContext.setUser(user);
+
         }
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

@@ -1,14 +1,13 @@
 package com.bioproj.controller;
 
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.domain.vo.K8sAppVo;
 import com.bioproj.pojo.K8sApp;
-import com.bioproj.pojo.reference.Reference;
 import com.bioproj.service.IK8sAppService;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ public class K8sAppController {
 
     @GetMapping
     public R<PageModel<K8sAppVo>> page(Integer number, Integer size) {
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
         PageModel<K8sAppVo> pageModel = k8sAppService.page(user,number, size, null);
         return R.ok(pageModel);
     }
@@ -46,14 +45,14 @@ public class K8sAppController {
     @ApiOperation("安装应用")
     @GetMapping("/install/{imageId}")
     public BaseResponse install(@PathVariable("imageId") String imageId){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();// SysUserInfoContext.getUser();
         K8sApp k8sApp= k8sAppService.install(imageId,user);
         return BaseResponse.ok("安装成功!");
     }
     @ApiOperation("新增")
     @PutMapping
     public BaseResponse add(@RequestBody K8sApp k8sApp){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto(); //SysUserInfoContext.getUser();
         k8sApp.setId(null);
 
         k8sAppService.save(k8sApp,user);

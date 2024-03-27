@@ -1,16 +1,12 @@
 package com.bioproj.kafka;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
-import com.bioproj.pojo.Application;
+
 import com.bioproj.pojo.Samples;
 import com.bioproj.pojo.task.Workflow;
 import com.bioproj.service.IApplicationService;
 import com.bioproj.service.IWorkflowService;
 import com.google.gson.JsonObject;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.common.SystemRuntimeException;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.BeanUtils;
@@ -38,7 +34,7 @@ public class CreateWorkflow {
         try {
             Object workflowJson = record.value();
             String key = record.key();
-            JSONObject jsonObject = JSON.parseObject(workflowJson.toString());
+//            JSONObject jsonObject = JSON.parseObject(workflowJson.toString());
 
             Workflow workflow = new Workflow();
 

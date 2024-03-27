@@ -1,10 +1,11 @@
 package com.bioproj.controller;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
 import com.bioproj.pojo.task.TaskData;
 import com.bioproj.service.ITaskDataService;
-import com.bioproj.domain.BaseResponse;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
+import com.bioproj.pojo.BaseResponse;
+
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

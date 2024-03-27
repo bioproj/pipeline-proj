@@ -1,9 +1,10 @@
 package com.bioproj.service;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.QueryCriteriaVo;
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.pojo.Reports;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
-import com.mbiolance.cloud.auth.domain.vo.QueryCriteriaVo;
+;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,7 +24,7 @@ public interface IReportsService {
     List<Reports> delWorkflowId(String taskId);
 
     PageModel<Reports> page(Integer number, Integer size, List<QueryCriteriaVo> criteriaVos);
-    PageModel<Reports> page(SysUserDto user,Integer number, Integer size, List<QueryCriteriaVo> criteriaVos);
+    PageModel<Reports> page(SysUserDto user, Integer number, Integer size, List<QueryCriteriaVo> criteriaVos);
     Reports del(String s);
 
     Reports update(String id, Reports reportsParam);

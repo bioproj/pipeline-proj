@@ -1,9 +1,8 @@
 package com.bioproj.controller;
 
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import com.bioproj.domain.vo.WorkflowTaskVo;
 import com.bioproj.pojo.task.Task;
-import com.bioproj.pojo.task.TaskData;
 import com.bioproj.service.ITaskService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

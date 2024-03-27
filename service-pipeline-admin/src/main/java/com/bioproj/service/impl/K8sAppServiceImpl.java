@@ -1,5 +1,9 @@
 package com.bioproj.service.impl;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.QueryCriteriaVo;
+import com.bioproj.domain.R;
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.domain.enums.K8sStatus;
 import com.bioproj.domain.vo.K8sAppVo;
 import com.bioproj.k8s.KService;
@@ -13,11 +17,7 @@ import com.bioproj.service.IK8sAppService;
 import com.bioproj.service.IPortsService;
 import com.bioproj.service.images.IImagesService;
 import com.bioproj.utils.ServiceUtil;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
-import com.mbiolance.cloud.auth.domain.vo.QueryCriteriaVo;
-import com.mbiolance.cloud.auth.rpc.SysUserFeignService;
+
 import io.kubernetes.client.openapi.ApiCallback;
 import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
@@ -61,8 +61,8 @@ public class K8sAppServiceImpl implements IK8sAppService {
     IImagesService imagesService;
 
 
-    @Autowired
-    SysUserFeignService sysUserFeignService;
+//    @Autowired
+//    SysUserFeignService sysUserFeignService;
 
     private  static String namespace = "nextflow";
 
@@ -78,14 +78,14 @@ public class K8sAppServiceImpl implements IK8sAppService {
         List<K8sApp> content = page.getContent();
         List<Integer> userIds = ServiceUtil.fetchListProperty(content, K8sApp::getUserId);
 
-        R<List<SysUserDto>> userList = sysUserFeignService.getByIds(userIds);
-        Map<Integer, SysUserDto> userDtoMap = ServiceUtil.convertToMap(userList.getData(), SysUserDto::getId);
+//        R<List<SysUserDto>> userList = sysUserFeignService.getByIds(userIds);
+//        Map<Integer, SysUserDto> userDtoMap = ServiceUtil.convertToMap(userList.getData(), SysUserDto::getId);
         List<K8sAppVo> k8sAppVos = content.stream().map(item -> {
             K8sAppVo k8sAppVo = new K8sAppVo();
-            if (userDtoMap.containsKey(item.getUserId())) {
-                SysUserDto sysUserDto = userDtoMap.get(item.getUserId());
-                k8sAppVo.setNickname(sysUserDto.getNickName());
-            }
+//            if (userDtoMap.containsKey(item.getUserId())) {
+////                SysUserDto sysUserDto = userDtoMap.get(item.getUserId());
+////                k8sAppVo.setNickname(sysUserDto.getNickName());
+//            }
             BeanUtils.copyProperties(item, k8sAppVo);
             return k8sAppVo;
         }).collect(Collectors.toList());
@@ -112,7 +112,7 @@ public class K8sAppServiceImpl implements IK8sAppService {
         return k8sAppVos;
     }
     @Override
-    public PageModel<K8sAppVo> page(SysUserDto user,Integer number, Integer size, List<QueryCriteriaVo> criteriaVos) {
+    public PageModel<K8sAppVo> page(SysUserDto user, Integer number, Integer size, List<QueryCriteriaVo> criteriaVos) {
         number -= 1;
         number = number <= 0 ? 0 : number;
         size = size <= 0 ? 10 : size;
@@ -131,14 +131,14 @@ public class K8sAppServiceImpl implements IK8sAppService {
         List<K8sApp> content = page.getContent();
         List<Integer> userIds = ServiceUtil.fetchListProperty(content, K8sApp::getUserId);
 
-        R<List<SysUserDto>> userList = sysUserFeignService.getByIds(userIds);
-        Map<Integer, SysUserDto> userDtoMap = ServiceUtil.convertToMap(userList.getData(), SysUserDto::getId);
+//        R<List<SysUserDto>> userList = sysUserFeignService.getByIds(userIds);
+//        Map<Integer, SysUserDto> userDtoMap = ServiceUtil.convertToMap(userList.getData(), SysUserDto::getId);
         List<K8sAppVo> k8sAppVos = content.stream().map(item -> {
             K8sAppVo k8sAppVo = new K8sAppVo();
-            if (userDtoMap.containsKey(item.getUserId())) {
-                SysUserDto sysUserDto = userDtoMap.get(item.getUserId());
-                k8sAppVo.setNickname(sysUserDto.getName());
-            }
+//            if (userDtoMap.containsKey(item.getUserId())) {
+//                SysUserDto sysUserDto = userDtoMap.get(item.getUserId());
+//                k8sAppVo.setNickname(sysUserDto.getName());
+//            }
             BeanUtils.copyProperties(item, k8sAppVo);
             return k8sAppVo;
         }).collect(Collectors.toList());

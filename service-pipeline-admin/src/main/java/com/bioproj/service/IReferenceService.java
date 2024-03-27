@@ -1,10 +1,11 @@
 package com.bioproj.service;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.QueryCriteriaVo;
 import com.bioproj.pojo.reference.Reference;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.vo.QueryCriteriaVo;
 
 import java.util.List;
+
 
 public interface IReferenceService {
     PageModel<Reference> page(Integer number, Integer size, List<QueryCriteriaVo> criteriaVos);

@@ -1,12 +1,12 @@
 package com.bioproj.controller;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.pojo.Reports;
 import com.bioproj.service.IReportsService;
-import com.bioproj.domain.BaseResponse;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+import com.bioproj.pojo.BaseResponse;
+
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class ReportsController {
 
     @GetMapping
     public R<PageModel<Reports>> page(Integer number, Integer size) {
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();// SysUserInfoContext.getUser();
         PageModel<Reports> pageModel = reportsService.page(user,number, size, null);
         return R.ok(pageModel);
     }

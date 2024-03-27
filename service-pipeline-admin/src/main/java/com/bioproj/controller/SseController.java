@@ -1,9 +1,9 @@
 package com.bioproj.controller;
 
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.service.sse.ISseServer;
 import com.bioproj.service.sse.SseServerImpl;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
@@ -32,7 +32,7 @@ public class SseController {
          * 一般取登录用户账号作为 messageId。分组的话需要约定 messageId的格式。
          * 这里模拟创建一个用户连接
          */
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
 
 //        String userId = "userId-1";// + RandomUtils.nextInt(1, 10);
         return SseServerImpl.createConnect(user.getId()+"");
@@ -43,7 +43,7 @@ public class SseController {
          * 一般取登录用户账号作为 messageId。分组的话需要约定 messageId的格式。
          * 这里模拟创建一个用户连接
          */
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user =new SysUserDto();// SysUserInfoContext.getUser();
 
 //        String userId = "userId-1";// + RandomUtils.nextInt(1, 10);
         return SseServerImpl.createConnect("1");

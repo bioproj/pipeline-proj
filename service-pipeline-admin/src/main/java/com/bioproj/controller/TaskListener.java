@@ -5,7 +5,7 @@ import com.bioproj.live.LiveEventsService;
 import com.bioproj.pojo.task.Workflow;
 import com.bioproj.domain.enums.WorkflowStatus;
 import com.bioproj.service.IWorkflowService;
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import com.bioproj.websocket.WebSocketServer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

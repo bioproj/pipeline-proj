@@ -4,9 +4,8 @@ import com.bioproj.pojo.task.Task;
 import com.bioproj.pojo.task.TaskData;
 import com.bioproj.service.ITaskDataService;
 import com.bioproj.service.ITaskService;
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import com.bioproj.utils.FileUtils;
-import com.mbiolance.cloud.auth.common.SystemRuntimeException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -39,11 +38,11 @@ public class TaskProcessController {
     public BaseResponse subTakes( @PathVariable("id")String id){
         Task task = taskProcessService.findById(id);
         if(task==null){
-            throw new SystemRuntimeException("task["+task.getId()+"]不存在!");
+            throw new RuntimeException("task["+task.getId()+"]不存在!");
         }
         TaskData taskData = taskDataService.findById(task.getDataId());
         if(taskData==null){
-            throw new SystemRuntimeException("taskData["+taskData.getId()+"]不存在!");
+            throw new RuntimeException("taskData["+taskData.getId()+"]不存在!");
         }
         String workDir = taskData.getWorkdir(); //taskProcess.getWorkdir();
 

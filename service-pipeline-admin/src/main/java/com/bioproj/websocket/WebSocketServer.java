@@ -7,9 +7,8 @@ package com.bioproj.websocket;
 //import com.wangyang.util.TokenProvider;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
+import com.bioproj.domain.SysUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +99,7 @@ public class WebSocketServer {
     @OnMessage
     public void OnMessage(String msg, @PathParam( "token") String token){
 //        System.out.println("当前的uuid为："+userDetailDTO.getUsername());
-        JSONObject jsonObject = JSON.parseObject(msg);
+//        JSONObject jsonObject = JSON.parseObject(msg);
 
         System.out.println("收到消息: "+msg);
     }

@@ -4,7 +4,7 @@ import com.bioproj.pojo.Repos;
 import com.bioproj.service.GiteaHttpService;
 import com.bioproj.service.IGiteaService;
 import com.bioproj.service.store.IStoreService;
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

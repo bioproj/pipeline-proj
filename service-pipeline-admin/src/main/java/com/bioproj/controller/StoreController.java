@@ -1,13 +1,11 @@
 package com.bioproj.controller;
 
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
 import com.bioproj.pojo.Repos;
-import com.bioproj.pojo.reference.Reference;
 import com.bioproj.service.store.IStoreService;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -94,8 +92,8 @@ public class StoreController {
     @PutMapping
     @ApiOperation("新增")
     public BaseResponse add(@RequestBody Repos wareHouse){
-        SysUserDto user = SysUserInfoContext.getUser();
-        wareHouse.setUserId(user.getId());
+//        SysUserDto user = SysUserInfoContext.getUser();
+//        wareHouse.setUserId(user.getId());
         wareHouse.setId(null);
         Repos save = wareHouseService.save(wareHouse);
         return BaseResponse.ok(save);

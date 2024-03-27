@@ -1,5 +1,8 @@
 package com.bioproj.controller;
 
+import com.bioproj.domain.PageModel;
+import com.bioproj.domain.R;
+import com.bioproj.domain.SysUserDto;
 import com.bioproj.domain.enums.K8sStatus;
 import com.bioproj.domain.enums.WorkflowType;
 import com.bioproj.domain.vo.K8sAppVo;
@@ -14,12 +17,9 @@ import com.bioproj.pojo.task.Workflow;
 import com.bioproj.pojo.vo.WorkflowVo;
 import com.bioproj.repository.AppRepository;
 import com.bioproj.service.*;
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import com.bioproj.utils.FileUtils;
-import com.mbiolance.cloud.auth.common.SysUserInfoContext;
-import com.mbiolance.cloud.auth.domain.PageModel;
-import com.mbiolance.cloud.auth.domain.R;
-import com.mbiolance.cloud.auth.domain.dto.SysUserDto;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -92,7 +92,7 @@ public class WorkflowController {
     public BaseResponse retry(@PathVariable("id") String id, @RequestBody WorkflowParams workflowParams){
 //        Workflow workflow = new Workflow();
 
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
 
         Workflow workflow = taskAppService.findById(id);
         workflow.setParamsData(workflowParams.getParamsData());
@@ -140,7 +140,7 @@ public class WorkflowController {
     @ApiOperation("重试并创建新任务")
     @PostMapping("/{id}/resume")
     public BaseResponse resume(@PathVariable("id") String id,@RequestBody Workflow task){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
 
         Workflow findApp = taskAppService.findById(id);
         findApp.setParamsData(task.getParamsData());
@@ -173,7 +173,7 @@ public class WorkflowController {
     @GetMapping("page")
     public R<PageModel<Workflow>>  page(@RequestParam(defaultValue = "1", required = false) Integer number
             , @RequestParam(defaultValue = "20", required = false) Integer size){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
         number -= 1;
         number = number <= 0 ? 0 : number;
         size = (size <= 0) ? 10 : size;
@@ -195,7 +195,7 @@ public class WorkflowController {
     @GetMapping("pageDebug")
     public R<PageModel<Workflow>>  pageDebug(@RequestParam(defaultValue = "1", required = false) Integer number
             , @RequestParam(defaultValue = "20", required = false) Integer size){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
         number -= 1;
         number = number <= 0 ? 0 : number;
         size = (size <= 0) ? 10 : size;
@@ -215,7 +215,7 @@ public class WorkflowController {
     @ApiOperation("单查")
     @GetMapping("/{id}")
     public BaseResponse id(@PathVariable("id")String id){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
 
         Workflow workflow = taskAppService.findById(id);
         WorkflowVo workflowVo = new WorkflowVo();
@@ -356,7 +356,7 @@ public class WorkflowController {
     @ApiOperation("从商店模板创建工作流")
     @PostMapping("/createWorkflowFromStore")
     public BaseResponse createWorkflowFromStore(@RequestBody WorkflowParams workflowParam){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();// SysUserInfoContext.getUser();
 //        Repos repos = storeService.findById(templateId);
 //
 //        workflow.setId(null);
@@ -368,7 +368,7 @@ public class WorkflowController {
     @ApiOperation("获取样本队列的工作流")
     @GetMapping("/listSampleQueueWorkflow")
     public BaseResponse listSampleQueueWorkflow(){
-        SysUserDto user = SysUserInfoContext.getUser();
+        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
 //        List<Workflow> workflowList = taskAppService.listByWorkflowType(user, WorkflowType.SAMPLE_QUEUE);
         List<Workflow> workflowList = taskAppService.listByWorkflowType( WorkflowType.SAMPLE_QUEUE);
         List<WorkflowDto> workflowDtos = workflowList.stream().map(item -> {

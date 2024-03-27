@@ -2,7 +2,7 @@ package com.bioproj.controller;
 
 import com.bioproj.pojo.WorkDir;
 import com.bioproj.repository.WorkDirRepository;
-import com.bioproj.domain.BaseResponse;
+import com.bioproj.pojo.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
