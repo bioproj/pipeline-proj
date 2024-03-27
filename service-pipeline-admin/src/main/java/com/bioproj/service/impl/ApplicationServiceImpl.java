@@ -35,8 +35,8 @@ public class ApplicationServiceImpl implements IApplicationService {
     @Autowired
     private IProcessService processService;
 
-    @Resource
-    private IWorkflowService appService;
+//    @Resource
+//    private IWorkflowService workflowService;
     @Override
     public void save(Application app) {
         appRepository.save(app);

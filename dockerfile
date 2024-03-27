@@ -19,7 +19,10 @@ RUN apt-get install -y net-tools
 USER root
 RUN echo "root:123456" | chpasswd
 CMD ["/sbin/init"]
- 
+#  systemctl enable mongod
+
+# docker tag   pipeline-proj   registry.cn-shanghai.aliyuncs.com/wybioinfo/pipeline-proj
+
 # docker run --rm -it  --privileged  -u root \
 #     -p 27018:27017 \
 #     -v /var/run/docker.sock:/var/run/docker.sock \
@@ -28,3 +31,13 @@ CMD ["/sbin/init"]
 #     -v /var/lib/docker:/var/lib/docker \
 #     -v $PWD:$PWD \
 #     pipeline-proj  
+
+
+# docker run --rm -it  --privileged  -u root  --name pipeline-proj  \
+#     -p 27018:27017  -p 60000:8889\
+#     -v /var/run/docker.sock:/var/run/docker.sock \
+#     -v  /usr/bin/docker:/usr/bin/docker \
+#     -v /etc/docker/daemon.json:/etc/docker/daemon.json \
+#     -v /var/lib/docker:/var/lib/docker \
+#     -v $PWD:$PWD \
+#     registry.cn-shanghai.aliyuncs.com/wybioinfo/pipeline-proj 
