@@ -1,0 +1,98 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test-api
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://192.168.0.134:3306/nextflow?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+#    username: wangyang
+#    password: 123456
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    open-in-view: false # 在controller层就打开EntityManager
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    groupId: test1
+exec:
+  slurmToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE5OTkwODE3NzYsImlhdCI6MTcwMDEyNzQ4MCwic3VuIjoicm9vdCJ9.MgteJFLvHb6-ND9j3tlLqhyqL73m-Yc5jdtDus74XK0
+
+wareHouse:
+  type: gitee #gitee gitea githup
+  orgNo: minebiome
+  token: a9e3995062a32af0d1dfe012a409a5f5
+
+
+
+server:
+  servlet:
+   context-path: /pipeline
+  port: 8889
+  tomcat:
+    basedir: ./logs
+    accesslog:
+      enabled: true
+      directory: ${spring.application.name}_access_log
+      pattern: "%t [%I] %{X-Forwarded-For}i %l %u %r %s %b %D"
+
+
+#scriptDir: D:\Git\py-java\nextflow-java-api\workDir
+
+nextflow:
+  exec: nf
+  tower-token: b35bb69c8e56e98e3326dce741d9f543d05f36b8
+  tower-endpoint: http://localhost:82/tower/api
+
+
+#gitea 地址
+giteaUrl: http://192.168.10.177:3000
+
+# readme临时路径
+#readmeTmpPath: D:\Git\py-java\nextflow-java-api\readmeTmpPath
+
+#wareHouse:
+#  type: gitea #gitee gitea githup
+#  orgNo: sxxyds
+#  token: xxxx
+
+#wareHouse:
+#  type: gitee #gitee gitea githup
+#  orgNo: sxxy_1
+#  token: b714520257c7016e2f94b3f4744e4027
+
+
+#gitea 地址t
+fluxServerUrl: http://192.168.10.177:5000
+k8sWorkDir:
+userId: 1000
+groupId: 1000
+
+userHome: /home/wy
+dockerRegistryUrl: http://main.com
+
+authDebug: true
+
+send:
+  error:
+
+nfImage: wybioinfo/nextflow:23.11.0
+# 工作路径
+workDir: /data
+k8s:
+  vscode:
+    nfdata-data-k8sData: k8sData
+    nfdata-workspace: workspace
+    nfdata-config-.kube: common/.kube
+    nfdata-etc-hosts: common/hosts
+    software-ssd2-software:
+  rstudio:
+    nfdata-data-k8sData: k8sData
+    nfdata-rstudio: workspace
+  pvc:
+    - nfdata
+    - software

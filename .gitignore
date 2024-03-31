@@ -49,7 +49,7 @@ workDir/
 workDir/
 work/
 bootstrap.yml
-application.yml
+#application.yml
 app.log
 
 !docker_config/application.yml
