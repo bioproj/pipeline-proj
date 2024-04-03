@@ -1,5 +1,6 @@
 package com.bioproj.controller;
 
+import com.bioproj.common.SysUserInfoContext;
 import com.bioproj.domain.PageModel;
 import com.bioproj.domain.R;
 import com.bioproj.domain.SysUserDto;
@@ -145,7 +146,7 @@ public class ApplicationController implements ApplicationFeignService {
     }
     @GetMapping("page")
     public R<PageModel<ApplicationVo>> page(Integer number, Integer size) {
-        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
+        SysUserDto user =  SysUserInfoContext.getUser();
         PageModel<ApplicationVo> pageModel = appService.page(user,number, size, null);
         return R.ok(pageModel);
     }

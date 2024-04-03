@@ -32,7 +32,7 @@ wareHouse:
 server:
   servlet:
    context-path: /pipeline
-  port: 8889
+  port: 30001
   tomcat:
     basedir: ./logs
     accesslog:

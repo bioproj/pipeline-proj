@@ -1,6 +1,7 @@
 package com.bioproj.filter;
 
 
+import com.bioproj.common.SysUserInfoContext;
 import com.bioproj.domain.SysUserDto;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -18,12 +19,12 @@ public class PipelineInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
-        if(user==null && authDebug){
-            user = new SysUserDto();
+        if( authDebug){
+            SysUserDto user = new SysUserDto();//SysUserInfoContext.getUser();
+//            user = new ysUserDto();
             user.setId(1);
             user.setLoginName("admin");
-
+            SysUserInfoContext.setUser(user);
         }
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
