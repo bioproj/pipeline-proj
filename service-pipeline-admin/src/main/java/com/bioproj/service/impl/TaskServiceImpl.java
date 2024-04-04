@@ -43,7 +43,7 @@ public class TaskServiceImpl implements ITaskService {
     @Autowired
     WorkflowRepository workflowRepository;
 
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate<String, Object> kafkaTemplate;
 
 

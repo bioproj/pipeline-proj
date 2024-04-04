@@ -2,6 +2,7 @@ package com.bioproj.trace.kafka;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.bioproj.config.KafkaConnectCondition;
 import com.bioproj.domain.enums.WorkflowType;
 import com.bioproj.live.LiveEventsService;
 import com.bioproj.pojo.*;
@@ -23,6 +24,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -35,6 +37,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
+@Conditional(KafkaConnectCondition.class)
 public class TraceController {
     @Autowired
     IWorkflowService workflowService;
@@ -50,7 +53,7 @@ public class TraceController {
     @Autowired
     TraceService traceService;
 
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate<String, Object> kafkaTemplate;
 //    @KafkaListener(topics = "tasks-result", containerFactory = "kafkaListenerContainerFactory")
 //    public void tasksResult(ConsumerRecord<String, Workflow> record) {

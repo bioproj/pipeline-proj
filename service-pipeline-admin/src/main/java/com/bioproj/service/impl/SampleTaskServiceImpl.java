@@ -40,7 +40,7 @@ public class SampleTaskServiceImpl implements ISampleTaskService {
 
     @Autowired
     private SampleTaskRepository sampleTaskRepository;
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Autowired

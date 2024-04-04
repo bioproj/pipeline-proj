@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags={"应用任务"})
 public class TaskListener {
 
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate<String, Object> kafkaTemplate;
     @Autowired
     private IWorkflowService taskAppService;

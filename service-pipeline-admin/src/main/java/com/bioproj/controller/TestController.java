@@ -36,7 +36,7 @@ public class TestController {
     IK8sApiService ik8sApiService;
 
 
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Autowired

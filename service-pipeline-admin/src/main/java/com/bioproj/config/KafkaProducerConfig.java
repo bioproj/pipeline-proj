@@ -21,6 +21,9 @@ public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
+//        if(bootstrapAddress.equals("0")){
+//            return null;
+//        }
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -40,6 +43,9 @@ public class KafkaProducerConfig {
 
     @Bean
     public KafkaTemplate<String, Object> kafkaTemplate() {
+//        if(bootstrapAddress.equals("0")){
+//            return null;
+//        }
         return new KafkaTemplate<>(producerFactory());
     }
 

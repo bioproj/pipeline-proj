@@ -14,11 +14,11 @@ import java.util.concurrent.ExecutionException;
 
 @Component
 public class KafkaMessageViewer {
-    private final KafkaAdmin kafkaAdmin;
-
-    public KafkaMessageViewer(KafkaAdmin kafkaAdmin) {
-        this.kafkaAdmin = kafkaAdmin;
-    }
+//    private final KafkaAdmin kafkaAdmin;
+//
+//    public KafkaMessageViewer(KafkaAdmin kafkaAdmin) {
+//        this.kafkaAdmin = kafkaAdmin;
+//    }
 
     public void viewTopicMessages(String topic) {
 //        Properties properties = new Properties();

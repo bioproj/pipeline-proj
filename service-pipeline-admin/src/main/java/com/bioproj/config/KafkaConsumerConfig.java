@@ -25,6 +25,9 @@ public class KafkaConsumerConfig {
     private String groupId;
     @Bean
     public ConsumerFactory<String, Object> consumerTraceFactory() {
+//        if(bootstrapAddress.equals("0")){
+//            return null;
+//        }
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -43,7 +46,9 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Object > kafkaTraceListenerContainerFactory() {
-
+//        if(bootstrapAddress.equals("0")){
+//            return null;
+//        }
         ConcurrentKafkaListenerContainerFactory<String, Object> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerTraceFactory());

@@ -31,7 +31,7 @@ public class K8sApiServiceImpl implements IK8sApiService {
 //    @Autowired
 //    ApiClient apiClient;
 
-    @Autowired
+    @Autowired(required = false)
     ApiClient client;
 
     @Override

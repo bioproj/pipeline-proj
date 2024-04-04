@@ -1,6 +1,7 @@
 package com.bioproj.kafka;
 
 
+import com.bioproj.config.KafkaConnectCondition;
 import com.bioproj.pojo.Samples;
 import com.bioproj.pojo.task.Workflow;
 import com.bioproj.service.IApplicationService;
@@ -15,12 +16,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Conditional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 @Slf4j
+@Conditional(KafkaConnectCondition.class)
 public class CreateWorkflow {
 
 

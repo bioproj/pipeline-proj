@@ -50,7 +50,7 @@ import java.util.stream.Collectors;
 //@Transactional
 public class WorkflowServiceImpl implements IWorkflowService {
 
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate<String, Object> kafkaTemplate;
     @Autowired
     private IProcessService processService;

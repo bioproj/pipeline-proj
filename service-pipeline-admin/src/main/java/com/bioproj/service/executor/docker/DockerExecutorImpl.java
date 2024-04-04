@@ -38,7 +38,7 @@ public class DockerExecutorImpl implements IExecutorsService {
     @Value("${workDir}")
     String workDir;
 
-    @Autowired
+   @Autowired(required = false)
     private KafkaTemplate<String, Object> kafkaTemplate;
 //    private static DockerClientConfig getConfig(){
 //        DockerClientConfig custom = DefaultDockerClientConfig.createDefaultConfigBuilder()

@@ -1,5 +1,7 @@
 package com.bioproj.k8s;
 
+import com.bioproj.config.K8sConnectCondition;
+import com.bioproj.config.KafkaConnectCondition;
 import com.google.gson.reflect.TypeToken;
 import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
@@ -8,7 +10,9 @@ import io.kubernetes.client.openapi.models.V1Namespace;
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
 import io.kubernetes.client.util.Watch;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import org.springframework.scheduling.annotation.Async;
@@ -20,6 +24,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 @Configuration
+@Slf4j
+@Conditional(K8sConnectCondition.class)
 public class ApiClientConfig {
     private Thread spooler;
     private Watch<V1Namespace> watch;
@@ -101,6 +107,7 @@ public class ApiClientConfig {
                 watch.close();
             }
         } catch (ApiException | IOException e) {
+            log.info("k8s连接失败！");
             throw new RuntimeException(e);
         }
     }
