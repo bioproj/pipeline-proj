@@ -15,13 +15,13 @@
 ## ✨ 介绍
 
 + 📜 项目介绍: <http://bioinfo.online/pipline/index.html>
-+ 🌐 项目预览: <http://yun.bioinfo.online>
++ 🌐 项目预览: <https://bioinfo.online/pipeline-proj>
 + 💡项目贡献: <https://bioinfo.online/articleList/20242274568.html>
 
-## 快速使用
+## 快速体验
 #### 第一步
-打开：<http://yun.bioinfo.online>
-> 注：为保证数据的安全，这里前端项目会访问本地localhost的api服务，因此需要第二步，在本的运行后端服务
+打开：<https://bioinfo.online/pipeline-proj>
+> 注：为保证数据的安全，这里前端项目会访问本地localhost的api服务，因此需要第二步，在本地运行后端服务
 #### 第二步
 在本地运行以下命名，启动后端服务
 > 注：需要安装docker
